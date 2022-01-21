@@ -30,7 +30,7 @@ const CountersList = () => {
       })
     );
   };
-  const handleDecrement = () => {
+  const handleDecrement = (id) => {
     setCounters((prevState) =>
       prevState.map((count) => {
         return count.id === id
