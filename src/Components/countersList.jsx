@@ -23,14 +23,22 @@ const CountersList = () => {
 
   const handleIncrement = (id) => {
     setCounters((prevState) =>
-      prevState.forEach((count) =>
-        count.id === id ? count.value + 1 : (count.value = count.value)
-      )
+      prevState.map((count) => {
+        return count.id === id
+          ? { ...count, value: count.value + 1 }
+          : { ...count };
+      })
     );
   };
-  //   const handleDecrement = () => {
-  //     setCounters((prevState) => prevState.value - 1);
-  //   };
+  const handleDecrement = () => {
+    setCounters((prevState) =>
+      prevState.map((count) => {
+        return count.id === id
+          ? { ...count, value: count.value - 1 }
+          : { ...count };
+      })
+    );
+  };
 
   return (
     <>
@@ -40,7 +48,7 @@ const CountersList = () => {
           {...count}
           onDelete={handleDelete}
           onIncrement={handleIncrement}
-          //   onDecrement={handleDecrement}
+          onDecrement={handleDecrement}
         />
       ))}
       <button className="btn btn-primary btn-sm" onClick={handleReset}>
